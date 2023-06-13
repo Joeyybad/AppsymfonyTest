@@ -1,20 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<main>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/jordan/Desktop/AppSymfony/AppSymfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/jordan/Desktop/AppSymfony/AppSymfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<img loading="lazy" style="width:550px; ;height:auto" class="d-block mx-auto" src="{{asset('images/Uptempo-removebg-preview.png')}}">
+							<h1 class="mt-2" style="font-size: medium;">UpTempo Chocolate
+							</h1>
+							<a class="btn btn-lg btn-primary mt-2" href="#">
+								Sneak IT !
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+				<div class="container">
+					<div class="carousel-caption">
+						<img loading="lazy" style="width:550px; ;height:auto" class="d-block mx-auto" src="{{asset('images/AirMax98-removebg-preview.png')}}">
+						<h1 class="mt-2" style="font-size: medium;">Air Max 98 White Royale Blue</h1>
+						<a class="btn btn-lg btn-primary mt-2" href="#">Learn more</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="carousel-item">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+			<div class="container">
+				<div class="carousel-caption text-end">
+					<img loading="lazy" style="width: 600px; height:auto" class="d-block mx-auto" src="{{asset('images/AirMax95.webp')}}">
+
+					<h1 class="mt-2" style="font-size: medium;">Air max 95 full black</h1>
+
+					<a class="btn btn-lg btn-primary mt-2" href="#">Browse gallery</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
-{% endblock %}
+<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Next</span>
+</button></div><!-- Marketing messaging and featurettes
+																																																																			  ================================================== --><!-- Wrap the rest of the page in another container to center all the content. --><div
+class="container marketing">
+
+<!-- Three columns of text below the carousel -->
+<div class="row">
+	<div class="col-lg-4">
+
+		<img class="rounded-circle" loading="lazy" width="200" height="160" src="{{asset('images/Yeezy.avif')}}" alt="">
+		<h2>
+			Nouvelles tendances
+		</h2>
+		<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+		<p>
+			<a class="btn btn-secondary" href="#">View details &raquo;</a>
+		</p>
+	</div>
+	<!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+
+		<img class="rounded-circle" loading="lazy" width="180" height="165" src="{{asset('images/AirmaxDawn.jpg')}}" alt="">
+
+		<h2>
+			Les plus vendus
+		</h2>
+		<p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+		<p>
+			<a class="btn btn-secondary" href="#">View details &raquo;</a>
+		</p>
+	</div>
+	<!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+		<img class="rounded-circle" loading="lazy" width="180" height="165" src="{{asset('images/SurvetNike.jpg')}}" alt="">
+		<h2>
+			Soldes
+		</h2>
+		<p>And lastly this, the third column of representative placeholder content.</p>
+		<p>
+			<a class="btn btn-secondary" href="#">View details &raquo;</a>
+		</p>
+	</div>
+	<!-- /.col-lg-4 -->
+</div>
+<!-- /.row -->
+
+
+<!-- START THE FEATURETTES -->
+
+<hr class="featurette-divider"><!-- /END THE FEATURETTES --></div><!-- /.container --><!-- FOOTER --><footer class="container">
+<p class="float-end">
+	<a href="#">Back to top</a>
+</p>
+<p>&copy; 2017–2021 Company, Inc. &middot;
+	<a href="#">Privacy</a>
+	&middot;
+	<a href="#">Terms</a>
+</p></footer></main>{% endblock %}

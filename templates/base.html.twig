@@ -7,6 +7,8 @@
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<link rel="stylesheet" href="assets/styles/app.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.0/spacelab/bootstrap.min.css">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -17,7 +19,7 @@
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-2">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="#">SneakersOnly</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,8 +38,8 @@
 							</li>
 						</ul>
 						<div class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+							<a href="#" class=" me-2 btn btn-outline-success">connection</a>
+							<a href="#" class=" btn btn-success">subscription</a>
 						</div>
 					</div>
 				</div>
