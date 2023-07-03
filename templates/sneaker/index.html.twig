@@ -4,5 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	{{ dump(sneakers)}}
+
+	<h1>Sneakers</h1>
+
+	{% for sneaker in sneakers %}
+		<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="{{sneaker.attachement}}" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">{{sneaker.brand}}
+					{{sneaker.model}}</h5>
+				<p class="card-text">{{sneaker.price}}€</p>
+				<p class="card-text">
+					Size available :
+					{{sneaker.size}}
+				</p>
+				<p class="card-text font-italic">
+					{{sneaker.content}}</p>
+
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+
+	{% endfor %}
+
 {% endblock %}
