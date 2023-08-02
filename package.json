@@ -26,6 +26,7 @@
         "chart.js": "^4.3.0",
         "jquery": "^3.7.0",
         "loader": "^2.1.1",
+        "maildev": "^2.1.0",
         "popper.js": "^1.16.1",
         "sass-loader": "^13.3.1"
     }
