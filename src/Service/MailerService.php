@@ -25,10 +25,10 @@ class MailerService{
     array $context):void
    {
     $email = (new TemplatedEmail())
-    ->from(new Address('noreply@monsitesneaker.fr', 'Monsitesneaker'))
+    ->from(new Address('noreply@monsitesneaker.fr', 'SneakerOnly'))
     ->to($to)
     ->subject($subject)
-    ->htmlTemplate("mails/$templateTwig")
+    ->htmlTemplate("$templateTwig")
     ->context($context);
 
     try {

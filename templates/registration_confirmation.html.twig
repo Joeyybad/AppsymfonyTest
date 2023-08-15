@@ -1,0 +1,20 @@
+<h1>Confirmation de votre compte utilisateur</h1>
+
+<p>
+	Bonjour,
+	{{user.username}}
+	et bienvenue sur sneakerOnly
+	<br>
+	<br>
+	Veuillez confirmer votre compte, dès maintenant en cliquant sur le liens ci-dessous
+	<br>
+	<br>
+	Ce lien est valable jusqu'au
+	<strong>{{lifeTimeToken}}</strong>
+	après cette date il ne sera plus valable<br><br>
+	<a href="{{absolute_url(path('account_verify', {token: token, id: user.id}))}}">verifier mon compte</a><br>
+	<br>
+	<strong>Ceci est un mail automatique merci de ne pas y répondre
+	</strong>
+	A bientot sur SneakersOnly
+</p>
