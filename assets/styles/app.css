@@ -9,32 +9,77 @@ body {
 }
 
 
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-/* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
+/* Carrousel */
+#carouselExampleControls {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-  bottom: 3rem;
-  z-index: 10;
+#carouselExampleControls .carousel-item img {
+  object-fit: contain;
+  object-position: center;
+  height: 200px;
+  /* Adjust image height here */
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
-/* Declare heights because of positioning of img element */
-.carousel-item {
-  height: 32rem;
-}
-
-.carousel-item>img {
+.carousel-control-prev,
+.carousel-control-next {
   position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 32rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.carousel-control-prev {
+  left: 0;
+}
+
+.carousel-control-next {
+  right: 0;
+}
+
+.carousel-control-prev-icon:first-child,
+.carousel-control-next-icon:first-child {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--bg-grey);
+}
+
+/* Media queries */
+@media (max-width: 767px) {
+  #carouselExampleControls .carousel-item img {
+    height: 150px;
+    min-height: 100px;
+    transition: ease all .5s;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 20px;
+    height: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #carouselExampleControls .carousel-item img {
+    height: 100px;
+  }
+}
+
 
 
 /* MARKETING CONTENT

@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
@@ -37,10 +39,20 @@
 								<a class="nav-link" href="/contact" tabindex="-1">Contact</a>
 							</li>
 						</ul>
-						<div class="d-flex">
-							<a href="/register" class=" me-2 btn btn-outline-success">connection</a>
-							<a href="/subscription" class=" btn btn-success">subscription</a>
-						</div>
+						{% if app.user %}
+							<!-- Utilisateur connecté -->
+							<span class="navbar-text">
+								Bienvenue,
+								{{ app.user.username}}
+							</span>
+							<a class="btn btn-outline-danger m-2 my-sm-0" href="{{ path('app_logout') }}">Log out</a>
+						{% else %}
+							<!-- Utilisateur non connecté -->
+							<form class="form-inline my-2 my-lg-0">
+								<a class="btn btn-outline-success my-2 my-sm-0 mr-2" href="{{ path('app_login') }}">Log in</a>
+								<a class="btn btn-outline-primary my-2 my-sm-0" href="{{ path('app_register') }}">Register</a>
+							</form>
+						{% endif %}
 					</div>
 				</div>
 			</nav>

@@ -8,7 +8,7 @@ use App\Service\MailerService;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,54 +23,64 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException as Exception
 
 class RegistrationController extends AbstractController
 {
+ 
+/**
+     * @Route("/register", name="app_register", methods={"GET"})
+     */
+    public function showRegistrationForm(): Response
+    {
+        $form = $this->createForm(RegistrationFormType::class);
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register", name="app_register_process", methods={"POST"})
      */
     public function register(
         Request $request, 
         UserPasswordHasherInterface $userPasswordHasher, 
         EntityManagerInterface $entityManager,
         MailerService $mailerService,
-        TokenGeneratorInterface $tokenGeneratorInterface): Response
-    {
+        TokenGeneratorInterface $tokenGeneratorInterface
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-       
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            //TOKEN
+            // TOKEN
             $tokenRegistration = $tokenGeneratorInterface->generateToken();
 
-            //USER
+            // USER
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
-            )
-                
+                )
             );
             $user->setCreatedAt(new DateTime());
 
-            //USERTOKEN 
+            // USER TOKEN
             $user->setTokenRegistration($tokenRegistration);
             
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // MAILER 
+            // MAILER
             $mailerService->send(
                 $user->getEmail(),
                 'Confirmation compte utilisateur',
                 'registration_confirmation.html.twig',
                 [
-                    'user'=> $user,
+                    'user' => $user,
                     'token' => $tokenRegistration,
                     'lifeTimeToken' => $user->getTokenRegistrationLifeTime()->format('d-m-Y-H-i-s')
-
                 ]
-                );
-            $this->addFlash('success','Votre compte a bien été crée, veuillez verifier votre email pour l\'activer'); 
+            );
+            $this->addFlash('success', 'Votre compte a bien été créé, veuillez vérifier votre email pour l\'activer');
 
             return $this->redirectToRoute('app_login');
         }
@@ -82,26 +92,33 @@ class RegistrationController extends AbstractController
 
     
     /**
-     * @Route("/verify/{token}/{id<\d+>}", name="account_verify", methods={"GET"})
+     * @Route("/verify/{token}", name="app_verify")
      */
     
-   
-    public function verify(string $token, User $user, EntityManagerInterface $em, ManagerRegistry $managerRegistry): response{
-        if($user->getTokenRegistration() !== $token){
-            throw new ExceptionAccessDeniedException();
+    public function verify(string $token, EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry): Response
+    {
+        // Rechercher l'utilisateur par le token
+        $user = $entityManager->getRepository(User::class)->findOneBy(['tokenRegistration' => $token]);
+
+        if (!$user) {
+            throw $this->createNotFoundException('No user found for this token.');
         }
-        if ($user->getTokenRegistration() === null){
-            throw new ExceptionAccessDeniedException();
+
+        // Vérifier si le token est expiré
+        if (new \DateTime('now') > $user->getTokenRegistrationLifeTime()) {
+            throw new AccessDeniedException('This token is expired.');
         }
-        if(new DateTime('now') > $user->getTokenRegistrationLifeTime()) {
-        throw new ExceptionAccessDeniedException();
-        }
+
+        // Activer l'utilisateur
+        $user->setIsVerified(true);
+        $user->setTokenRegistration(null); // Supprimer le token après vérification
+
+        // Utiliser le manager approprié pour persister les modifications
         $em = $managerRegistry->getManagerForClass(get_class($user));
         $em->persist($user);
-        $user->setIsVerified(true);
-        $user->setTokenRegistration(null);
         $em->flush();
-        $this->addFlash('success', 'Votre compte à bien été crée, vous pouvez maintenant vous connecter');
+
+        $this->addFlash('success', 'Votre compte a bien été créé, vous pouvez maintenant vous connecter.');
 
         return $this->redirectToRoute('app_login');
     }
